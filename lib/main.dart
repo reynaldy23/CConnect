@@ -48,7 +48,8 @@ class _MyHomePageState extends State<MyHomePage> {
           controller: controller,
           // scrollDirection: Axis.vertical,
           children: [
-            Container( //pg1
+            Container(
+              //pg1
               color: const Color(0xFFFFFFFF),
               child: Column(
                 children: [
@@ -78,7 +79,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
             ),
-            Container( //pg2
+            Container(
+              //pg2
               color: const Color(0xFFFFFFFF),
               child: Column(
                 children: [
@@ -94,7 +96,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   Container(
                     padding: const EdgeInsets.only(bottom: 20),
-                    child: Text("Organize all your contacts\nthe way you wanted!",
+                    child: Text(
+                        "Organize all your contacts\nthe way you wanted!",
                         textAlign: TextAlign.center,
                         style: GoogleFonts.poppins(
                             fontSize: 25,
@@ -109,7 +112,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
             ),
-            Container( //pg3
+            Container(
+              //pg3
               color: const Color(0xFFFFFFFF),
               child: Column(
                 children: [
@@ -139,7 +143,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
             ),
-            Container( //pg4
+            Container(
+              //pg4
               color: const Color(0xFFFFFFFF),
               child: Column(
                 children: [
@@ -173,40 +178,59 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       bottomSheet: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 0),
-        height: 80,
+        padding: const EdgeInsets.symmetric(horizontal: 45),
+        height: 140,
         color: const Color(0xFFFFFFFF),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: Column(
           children: [
-            TextButton(
-                onPressed: () {
-                  controller.jumpToPage(3);
-                },
-                child: const Text('SKIP')),
-            Center(
-              child: SmoothPageIndicator(
-                controller: controller,
-                count: 4,
-                effect: WormEffect(
-                  spacing: 16,
-                  dotColor: Colors.black26,
-                  activeDotColor: Colors.teal.shade700,
-                ),
-                onDotClicked: (index) => controller.animateToPage(
-                  index,
-                  duration: const Duration(milliseconds: 200),
-                  curve: Curves.easeIn,
+            Padding(
+              padding: const EdgeInsets.only(bottom: 50),
+              child: Center(
+                child: SmoothPageIndicator(
+                  controller: controller,
+                  count: 4,
+                  onDotClicked: (index) => controller.animateToPage(
+                    index,
+                    duration: const Duration(milliseconds: 200),
+                    curve: Curves.easeIn,
+                  ),
                 ),
               ),
             ),
-            TextButton(
-              onPressed: () {
-                controller.nextPage(
-                    duration: const Duration(milliseconds: 200),
-                    curve: Curves.easeInOut);
-              },
-              child: const Text('NEXT'),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TextButton(
+                    onPressed: () {
+                      controller.jumpToPage(3);
+                    },
+                    child: const Text(
+                      'Skip',
+                      style: TextStyle(color: Color(0xFF4285F4)),
+                    )),
+                TextButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(const Color(0xFF07409E)),
+                    padding: MaterialStateProperty.all<EdgeInsets>(const EdgeInsets.fromLTRB(30, 10, 30, 10))
+                  ),
+                  onPressed: () {
+                    controller.nextPage(
+                        duration: const Duration(milliseconds: 200),
+                        curve: Curves.easeInOut);
+                  },
+                  child: const Text.rich(
+                    TextSpan(
+                      children: [
+                        TextSpan(text: 'Next',
+                        style: TextStyle(color: Colors.white)),
+                        TextSpan(text: '     '),
+                        WidgetSpan(child: Icon(Icons.keyboard_arrow_right)),
+
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
