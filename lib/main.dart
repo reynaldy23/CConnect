@@ -4,6 +4,8 @@ import 'package:ms_undraw/ms_undraw.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'login.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -32,6 +34,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final controller = PageController();
+  bool isLastPage = false;
 
   @override
   void dispose() {
@@ -46,7 +49,9 @@ class _MyHomePageState extends State<MyHomePage> {
         padding: const EdgeInsets.only(bottom: 80),
         child: PageView(
           controller: controller,
-          // scrollDirection: Axis.vertical,
+          onPageChanged: (index){
+            setState(() => isLastPage = index == 3); //pg start from 0,1,2,3
+          },
           children: [
             Container(
               //pg1
@@ -177,7 +182,23 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      bottomSheet: Container(
+      bottomSheet: isLastPage
+        ? TextButton(
+        style: TextButton.styleFrom(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(0)
+          ),
+          primary: Colors.white,
+          backgroundColor: Colors.teal.shade700,
+          minimumSize: const Size.fromHeight(80)
+        ),
+        child: const Text(
+          'Get Started',
+          style: TextStyle(fontSize: 24),
+        ),
+        onPressed: () async {Get.to(const Login());},
+      )
+      : Container(
         padding: const EdgeInsets.symmetric(horizontal: 45),
         height: 140,
         color: const Color(0xFFFFFFFF),
