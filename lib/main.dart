@@ -49,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
         padding: const EdgeInsets.only(bottom: 80),
         child: PageView(
           controller: controller,
-          onPageChanged: (index){
+          onPageChanged: (index) {
             setState(() => isLastPage = index == 3); //pg start from 0,1,2,3
           },
           children: [
@@ -183,79 +183,81 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       bottomSheet: isLastPage
-        ? TextButton(
-        style: TextButton.styleFrom(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(0)
-          ),
-          primary: Colors.white,
-          backgroundColor: Colors.teal.shade700,
-          minimumSize: const Size.fromHeight(80)
-        ),
-        child: const Text(
-          'Get Started',
-          style: TextStyle(fontSize: 24),
-        ),
-        onPressed: () async {Get.to(const Login());},
-      )
-      : Container(
-        padding: const EdgeInsets.symmetric(horizontal: 45),
-        height: 140,
-        color: const Color(0xFFFFFFFF),
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(bottom: 50),
-              child: Center(
-                child: SmoothPageIndicator(
-                  controller: controller,
-                  count: 4,
-                  onDotClicked: (index) => controller.animateToPage(
-                    index,
-                    duration: const Duration(milliseconds: 200),
-                    curve: Curves.easeIn,
-                  ),
-                ),
+          ? TextButton(
+              style: TextButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(0)),
+                  primary: Colors.white,
+                  backgroundColor: Colors.teal.shade700,
+                  minimumSize: const Size.fromHeight(80)),
+              child: const Text(
+                'Get Started',
+                style: TextStyle(fontSize: 24),
               ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                TextButton(
-                    onPressed: () {
-                      controller.jumpToPage(3);
-                    },
-                    child: const Text(
-                      'Skip',
-                      style: TextStyle(color: Color(0xFF4285F4)),
-                    )),
-                TextButton(
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(const Color(0xFF07409E)),
-                    padding: MaterialStateProperty.all<EdgeInsets>(const EdgeInsets.fromLTRB(30, 10, 30, 10))
-                  ),
-                  onPressed: () {
-                    controller.nextPage(
-                        duration: const Duration(milliseconds: 200),
-                        curve: Curves.easeInOut);
-                  },
-                  child: const Text.rich(
-                    TextSpan(
-                      children: [
-                        TextSpan(text: 'Next',
-                        style: TextStyle(color: Colors.white)),
-                        TextSpan(text: '     '),
-                        WidgetSpan(child: Icon(Icons.keyboard_arrow_right)),
-
-                      ],
+              onPressed: () async {
+                Get.to(() => const Login());
+              },
+            )
+          : Container(
+              padding: const EdgeInsets.symmetric(horizontal: 45),
+              height: 140,
+              color: const Color(0xFFFFFFFF),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 50),
+                    child: Center(
+                      child: SmoothPageIndicator(
+                        controller: controller,
+                        count: 4,
+                        onDotClicked: (index) => controller.animateToPage(
+                          index,
+                          duration: const Duration(milliseconds: 200),
+                          curve: Curves.easeIn,
+                        ),
+                      ),
                     ),
                   ),
-                ),
-              ],
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TextButton(
+                          onPressed: () {
+                            controller.jumpToPage(3);
+                          },
+                          child: const Text(
+                            'Skip',
+                            style: TextStyle(color: Color(0xFF4285F4)),
+                          )),
+                      TextButton(
+                        style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                                const Color(0xFF07409E)),
+                            padding: MaterialStateProperty.all<EdgeInsets>(
+                                const EdgeInsets.fromLTRB(30, 10, 30, 10))),
+                        onPressed: () {
+                          controller.nextPage(
+                              duration: const Duration(milliseconds: 200),
+                              curve: Curves.easeInOut);
+                        },
+                        child: const Text.rich(
+                          TextSpan(
+                            children: [
+                              TextSpan(
+                                  text: 'Next',
+                                  style: TextStyle(color: Colors.white)),
+                              TextSpan(text: '     '),
+                              WidgetSpan(
+                                  child: Icon(Icons.keyboard_arrow_right)),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ],
-        ),
-      ),
     );
   }
 }
