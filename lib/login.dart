@@ -29,24 +29,43 @@ class _LoginState extends State<Login> {
         child: Column(
           // mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const SizedBox(height: 40),
+            const SizedBox(height: 80),
+            const Text(
+              'Welcome To',
+              style: TextStyle(color: Colors.white),
+            ),
+            const Text(
+              'CConnect',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 80),
             TextField(
               style: const TextStyle(color: Colors.white),
               controller: emailController,
               cursorColor: Colors.white,
               textInputAction: TextInputAction.next,
               decoration: const InputDecoration(
-                  labelText: 'E-mail Address',
-                  labelStyle: TextStyle(color: Colors.white)),
+
+                labelText: 'E-mail Address',
+                labelStyle: TextStyle(color: Colors.white),
+                prefixIcon: Icon(Icons.email, color: Colors.white),
+              ),
             ),
             const SizedBox(height: 4),
             TextField(
               controller: passwordController,
               textInputAction: TextInputAction.next,
-              decoration: const InputDecoration(labelText: 'Password', labelStyle: TextStyle(color: Colors.white)),
+              decoration: const InputDecoration(
+                labelText: 'Password',
+                labelStyle: TextStyle(color: Colors.white),
+                prefixIcon: Icon(Icons.password, color: Colors.white),
+              ),
               obscureText: true,
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 80),
             TextButton(
               onPressed: () {},
               child: const Text('Login'),
