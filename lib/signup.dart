@@ -1,22 +1,23 @@
-import 'package:cconnect/signup.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
-class Login extends StatefulWidget {
-  final VoidCallback onClickedSignUp;
+import 'login.dart';
 
-  const Login({
+class SignUp extends StatefulWidget {
+  final Function() onClickedSignIn;
+
+  const SignUp({
     Key? key,
-    required this.onClickedSignUp,
+    required this.onClickedSignIn,
   }) : super(key: key);
 
   @override
-  State<Login> createState() => _LoginState();
+  State<SignUp> createState() => _SignUpState();
 }
 
-class _LoginState extends State<Login> {
+class _SignUpState extends State<SignUp> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -36,7 +37,7 @@ class _LoginState extends State<Login> {
       //     barrierDismissible: false,
       //     builder: (context) => const Center(child: CircularProgressIndicator()));
       try {
-        await FirebaseAuth.instance.signInWithEmailAndPassword(
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: emailController.text.trim(),
           password: passwordController.text.trim(),
         );
@@ -105,7 +106,7 @@ class _LoginState extends State<Login> {
                       textStyle: const TextStyle(fontSize: 20),
                     ),
                     onPressed: signIn,
-                    child: const Text('Login'),
+                    child: const Text('Sign Up'),
                   )
                 ],
               ),
@@ -115,13 +116,13 @@ class _LoginState extends State<Login> {
               child: RichText(
                 text: TextSpan(
                   recognizer: TapGestureRecognizer()
-                    ..onTap = widget.onClickedSignUp,
-                  text: 'Don\'t have an account? ',
+                    ..onTap = widget.onClickedSignIn,
+                  text: 'Already have an account? ',
                   children: <TextSpan>[
                     TextSpan(
                       recognizer: TapGestureRecognizer()
-                        ..onTap = widget.onClickedSignUp,
-                      text: 'Sign Up Here!',
+                        ..onTap = widget.onClickedSignIn,
+                      text: 'Log In',
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Color(0xFF62BCFF),

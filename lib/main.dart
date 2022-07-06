@@ -1,11 +1,13 @@
 import 'package:cconnect/login.dart';
 import 'package:cconnect/menu_page.dart';
+import 'package:cconnect/signup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-// import 'login.dart';
+import 'auth_page.dart';
+import 'onboarding.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,17 +16,21 @@ Future main() async {
   runApp(const MyApp());
 }
 
+final navigatorKey = GlobalKey<NavigatorState>();
+
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      navigatorKey: navigatorKey,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MainPage(),
+      home: const OnBoarding(),
     );
   }
 }
@@ -40,7 +46,7 @@ class MainPage extends StatelessWidget {
           if (snapshot.hasData) {
             return const MainMenu();
           } else {
-            return const Login();
+            return const AuthPage();
           }
         },
       ));
