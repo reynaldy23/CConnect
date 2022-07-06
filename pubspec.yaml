@@ -25,6 +25,7 @@ dependencies:
   cloud_firestore: ^3.2.1
   firebase_core: ^1.19.1
   firebase_auth: ^3.4.1
+  email_validator: ^2.0.1
 
 
 dev_dependencies:

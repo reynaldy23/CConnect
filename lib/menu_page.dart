@@ -16,7 +16,7 @@ class _MainMenuState extends State<MainMenu> {
       color: Colors.yellow,
       child: Column(
         children: [
-          // SizedBox(height: 100),
+          const SizedBox(height: 100),
           ElevatedButton.icon(
             icon: const Icon(Icons.arrow_back, size: 32),
             label: const Text(
