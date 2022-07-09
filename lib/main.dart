@@ -1,10 +1,9 @@
-import 'package:cconnect/login.dart';
 import 'package:cconnect/menu_page.dart';
-import 'package:cconnect/signup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'auth_page.dart';
 import 'onboarding.dart';
@@ -29,8 +28,10 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        fontFamily: GoogleFonts.poppins().fontFamily,
       ),
       home: const OnBoarding(),
+
     );
   }
 }

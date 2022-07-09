@@ -1,9 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:get/get.dart';
 import 'package:email_validator/email_validator.dart';
-import 'login.dart';
 
 class SignUp extends StatefulWidget {
   final Function() onClickedSignIn;
@@ -34,7 +32,7 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     Future signUp() async {
       final isValid = formKey.currentState!.validate();
-      if(!isValid) return;
+      if (!isValid) return;
 
       try {
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -78,9 +76,9 @@ class _SignUpState extends State<SignUp> {
                 ),
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 validator: (email) =>
-                email != null && !EmailValidator.validate(email)
-                ? 'Enter a valid email'
-                : null,
+                    email != null && !EmailValidator.validate(email)
+                        ? 'Enter a valid email'
+                        : null,
               ),
               const SizedBox(height: 4),
               TextFormField(
@@ -93,8 +91,7 @@ class _SignUpState extends State<SignUp> {
                 ),
                 obscureText: true,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
-                validator: (value) =>
-                value != null && value.length < 6
+                validator: (value) => value != null && value.length < 6
                     ? 'Enter min. 6 characters'
                     : null,
               ),
@@ -168,8 +165,8 @@ class _SignUpState extends State<SignUp> {
                               ),
                               TextButton(
                                 style: TextButton.styleFrom(
-                                  padding:
-                                      const EdgeInsets.symmetric(horizontal: 30),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 30),
                                   primary: Colors.white,
                                   textStyle: const TextStyle(fontSize: 18),
                                 ),
