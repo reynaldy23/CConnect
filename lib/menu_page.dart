@@ -1,5 +1,8 @@
+import 'package:cconnect/settings_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class MainMenu extends StatefulWidget {
   const MainMenu({Key? key}) : super(key: key);
@@ -26,7 +29,7 @@ class _MainMenuState extends State<MainMenu> {
                 Column(
                   //crossAxisAlignment
                   children: [
-                    const SizedBox(height: 55),
+                    const SizedBox(height: 48),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
@@ -36,10 +39,13 @@ class _MainMenuState extends State<MainMenu> {
                             style: TextStyle(fontSize: 16),
                           ),
                         ),
-                        const SizedBox(
-                          width: 100,
-                        ),
-                        const Icon(Icons.settings, color: Colors.white)
+                        const SizedBox(width: 138),
+                        IconButton(
+                          icon: const Icon(Icons.settings, color: Colors.white),
+                          onPressed: () {
+                            Get.to(() => const SettingsPage());
+                          },
+                        )
                       ],
                     ),
                   ],
@@ -113,8 +119,9 @@ class _MainMenuState extends State<MainMenu> {
                               label: const Text(
                                 'Show QR Code',
                                 style: TextStyle(
-                                    color: Color(0xFF4285F4),
-                                    fontWeight: FontWeight.bold),
+                                  color: Color(0xFF4285F4),
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
                           ],
@@ -126,19 +133,38 @@ class _MainMenuState extends State<MainMenu> {
               ],
             ),
           ),
-          const SizedBox(height: 100),
-          RichText(text: const TextSpan(text: 'hello'))
+          const SizedBox(height: 73),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: RichText(
+              text: TextSpan(
+                children: [
+                  const TextSpan(
+                    text: '    ',
+                    style: TextStyle(fontSize: 28),
+                  ),
+                  const WidgetSpan(
+                    child: Icon(
+                      Icons.person_add,
+                      size: 30,
+                      color: Color(0xFF1190EE),
+                    ),
+                  ),
+                  TextSpan(
+                    text: ' Recent Add',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 28,
+                      fontFamily: GoogleFonts.poppins().fontFamily,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );
   }
 }
-
-// ElevatedButton.icon(
-// icon: const Icon(Icons.arrow_back, size: 32),
-// label: const Text(
-// 'Sign Out',
-// style: TextStyle(fontSize: 24),
-// ),
-// onPressed: () => FirebaseAuth.instance.signOut(),
-// ),
