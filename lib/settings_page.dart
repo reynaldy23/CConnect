@@ -1,8 +1,9 @@
+import 'package:cconnect/howtouse.dart';
 import 'package:cconnect/menu_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -56,10 +57,12 @@ class _SettingsPageState extends State<SettingsPage> {
                     width: MediaQuery.of(context).size.width - 80,
                     height: 60,
                     decoration: BoxDecoration(
-                        border: Border.all(
-                            color: const Color(0xFF4285F4), width: 3),
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(10),),),
+                      border:
+                          Border.all(color: const Color(0xFF4285F4), width: 3),
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(10),
+                      ),
+                    ),
                     child: ElevatedButton.icon(
                       icon: const Icon(Icons.language,
                           size: 18, color: Color(0xFF4285F4)),
@@ -72,7 +75,8 @@ class _SettingsPageState extends State<SettingsPage> {
                         'Language',
                         style: TextStyle(fontSize: 18, color: Colors.black),
                       ),
-                      onPressed: () => FirebaseAuth.instance.signOut(),
+                      onPressed: () => FirebaseAuth.instance.signOut()
+                      ,
                     ),
                   ),
                   const SizedBox(height: 20),
@@ -94,10 +98,9 @@ class _SettingsPageState extends State<SettingsPage> {
                           alignment: Alignment.centerLeft),
                       label: const Text(
                         'Theme',
-                        style:
-                            TextStyle(fontSize: 18, color: Colors.black),
+                        style: TextStyle(fontSize: 18, color: Colors.black),
                       ),
-                      onPressed: () => FirebaseAuth.instance.signOut(),
+                      onPressed: () {},
                     ),
                   ),
                   const SizedBox(height: 20),
@@ -121,7 +124,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         'How To Use',
                         style: TextStyle(fontSize: 18, color: Colors.black),
                       ),
-                      onPressed: () => FirebaseAuth.instance.signOut(),
+                      onPressed: () {Get.to(() => const HowToUse());},
                     ),
                   ),
                   const SizedBox(height: 20),
@@ -145,7 +148,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         'About Us',
                         style: TextStyle(fontSize: 18, color: Colors.black),
                       ),
-                      onPressed: () => FirebaseAuth.instance.signOut(),
+                      onPressed: () {},
                     ),
                   ),
                   const SizedBox(height: 20),
@@ -157,7 +160,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             color: const Color(0xFF4285F4), width: 3),
                         borderRadius:
                             const BorderRadius.all(Radius.circular(10))),
-                    child: ElevatedButton.icon(
+                    child: TextButton.icon(
                       icon: const Icon(Icons.logout,
                           size: 18, color: Color(0xFF4285F4)),
                       style: ButtonStyle(

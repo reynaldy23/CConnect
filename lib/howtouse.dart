@@ -1,18 +1,21 @@
 import 'package:cconnect/main.dart';
+import 'package:cconnect/settings_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ms_undraw/ms_undraw.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class OnBoarding extends StatefulWidget {
-  const OnBoarding({Key? key}) : super(key: key);
+
+
+class HowToUse extends StatefulWidget {
+  const HowToUse({Key? key}) : super(key: key);
 
   @override
-  State<OnBoarding> createState() => _OnBoardingState();
+  State<HowToUse> createState() => _HowToUseState();
 }
 
-class _OnBoardingState extends State<OnBoarding> {
+class _HowToUseState extends State<HowToUse> {
   final controller = PageController();
   bool isLastPage = false;
 
@@ -148,7 +151,7 @@ class _OnBoardingState extends State<OnBoarding> {
                   Container(
                     padding: const EdgeInsets.only(bottom: 20),
                     child: Text(
-                      "Let's Get Started!",
+                      "Enjoy!",
                       style: GoogleFonts.poppins(
                           fontSize: 25,
                           color: const Color(0xFF4285F4),
@@ -156,7 +159,7 @@ class _OnBoardingState extends State<OnBoarding> {
                     ),
                   ),
                   const Text(
-                    "Create your account right now\nto enjoy all CConnect benefits!",
+                    "Start Sharing Now your\ncontacts with everyone!",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 15),
                   ),
@@ -168,81 +171,78 @@ class _OnBoardingState extends State<OnBoarding> {
       ),
       bottomSheet: isLastPage
           ? TextButton(
-              style: TextButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(0),
-                ),
-                primary: Colors.white,
-                backgroundColor: Colors.teal.shade700,
-                minimumSize: const Size.fromHeight(80),
-              ),
-              child: const Text(
-                'Get Started',
-                style: TextStyle(fontSize: 24),
-              ),
-              onPressed: () {
-                Get.to(() => const MainPage());
-              },
-            )
+        style: TextButton.styleFrom(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(0),
+          ),
+          primary: Colors.white,
+          backgroundColor: Colors.teal.shade700,
+          minimumSize: const Size.fromHeight(80),
+        ),
+        child: const Text(
+          'Back to Settings',
+          style: TextStyle(fontSize: 24),
+        ),
+        onPressed: () {
+          Get.to(() => const SettingsPage());
+        },
+      )
           : Container(
-              padding: const EdgeInsets.symmetric(horizontal: 45),
-              height: 140,
-              color: const Color(0xFFFFFFFF),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 50),
-                    child: Center(
-                      child: SmoothPageIndicator(
-                        controller: controller,
-                        count: 4,
-                        onDotClicked: (index) => controller.animateToPage(
-                          index,
-                          duration: const Duration(milliseconds: 200),
-                          curve: Curves.easeIn,
-                        ),
-                      ),
-                    ),
+        padding: const EdgeInsets.symmetric(horizontal: 45),
+        height: 140,
+        color: const Color(0xFFFFFFFF),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(bottom: 50),
+              child: Center(
+                child: SmoothPageIndicator(
+                  controller: controller,
+                  count: 4,
+                  onDotClicked: (index) => controller.animateToPage(
+                    index,
+                    duration: const Duration(milliseconds: 200),
+                    curve: Curves.easeIn,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      TextButton(
-                        onPressed: () {
-                          controller.jumpToPage(3);
-                        },
-                        child: const Text(
-                          'Skip',
-                          style: TextStyle(
-                            color: Color(0xFF4285F4),
-                          ),
-                        ),
-                      ),
-                      TextButton.icon(
-                        icon: const Icon(Icons.keyboard_arrow_right),
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                            const Color(0xFF07409E),
-                          ),
-                          padding: MaterialStateProperty.all<EdgeInsets>(
-                            const EdgeInsets.fromLTRB(30, 10, 30, 10),
-                          ),
-                        ),
-                        onPressed: () {
-                          controller.nextPage(
-                              duration: const Duration(milliseconds: 200),
-                              curve: Curves.easeInOut);
-                        },
-                        label: const Text(
-                          'Next',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
+                ),
               ),
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TextButton(
+                  onPressed: () {
+                    controller.jumpToPage(3);
+                  },
+                  child: const Text(
+                    'Skip',
+                    style: TextStyle(
+                      color: Color(0xFF4285F4),
+                    ),
+                  ),
+                ),
+                TextButton.icon(
+                  icon: const Icon(Icons.keyboard_arrow_right),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                      const Color(0xFF07409E),
+                    ),
+                    padding: MaterialStateProperty.all<EdgeInsets>(
+                      const EdgeInsets.fromLTRB(30, 10, 30, 10),
+                    ),
+                  ),
+                  onPressed: () {
+                  },
+                  label: const Text(
+                    'Next',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

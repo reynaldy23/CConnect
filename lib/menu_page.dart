@@ -14,6 +14,7 @@ class MainMenu extends StatefulWidget {
 class _MainMenuState extends State<MainMenu> {
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser!.email!.toString();
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
@@ -34,16 +35,18 @@ class _MainMenuState extends State<MainMenu> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         RichText(
-                          text: const TextSpan(
-                            text: 'Hi, ',
-                            style: TextStyle(fontSize: 16),
+                          text: TextSpan(
+                            text: 'Hi, $user',
+                            style: const TextStyle(fontSize: 16),
                           ),
                         ),
                         const SizedBox(width: 138),
                         IconButton(
                           icon: const Icon(Icons.settings, color: Colors.white),
                           onPressed: () {
-                            Get.to(() => const SettingsPage());
+                            Get.to(
+                              () => const SettingsPage(),
+                            );
                           },
                         )
                       ],
@@ -89,7 +92,7 @@ class _MainMenuState extends State<MainMenu> {
                                   ),
                                 ),
                               ),
-                              onPressed: () {},
+                              onPressed: () => FirebaseAuth.instance.signOut(),
                               label: const Text(
                                 'Scan QR Code',
                                 style: TextStyle(
@@ -151,7 +154,7 @@ class _MainMenuState extends State<MainMenu> {
                     ),
                   ),
                   TextSpan(
-                    text: ' Recent Add',
+                    text: ' Contacts',
                     style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
