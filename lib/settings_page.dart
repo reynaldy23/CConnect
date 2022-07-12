@@ -1,9 +1,9 @@
 import 'package:cconnect/howtouse.dart';
 import 'package:cconnect/menu_page.dart';
+import 'package:cconnect/onboarding.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -15,6 +15,13 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
+    // Future handleSignOut() async {
+    //   try {
+    //     return await FirebaseAuth.instance.signOut();
+    //   }catch (e){
+    //     return (e);
+    //   }
+    // }
     return Scaffold(
       backgroundColor: const Color(0xFF39569E),
       body: Column(
@@ -75,8 +82,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         'Language',
                         style: TextStyle(fontSize: 18, color: Colors.black),
                       ),
-                      onPressed: () => FirebaseAuth.instance.signOut()
-                      ,
+                      onPressed: () => FirebaseAuth.instance.signOut(),
                     ),
                   ),
                   const SizedBox(height: 20),
@@ -124,7 +130,9 @@ class _SettingsPageState extends State<SettingsPage> {
                         'How To Use',
                         style: TextStyle(fontSize: 18, color: Colors.black),
                       ),
-                      onPressed: () {Get.to(() => const HowToUse());},
+                      onPressed: () {
+                        Get.to(() => const HowToUse());
+                      },
                     ),
                   ),
                   const SizedBox(height: 20),
@@ -172,7 +180,10 @@ class _SettingsPageState extends State<SettingsPage> {
                         'Log Out',
                         style: TextStyle(fontSize: 18, color: Colors.black),
                       ),
-                      onPressed: () => FirebaseAuth.instance.signOut(),
+                      onPressed: () {
+                        FirebaseAuth.instance.signOut();
+                        Get.to(() => const OnBoarding());
+                      },
                     ),
                   ),
                 ],
