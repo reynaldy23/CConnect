@@ -1,3 +1,4 @@
+import 'package:cconnect/add_profile.dart';
 import 'package:cconnect/settings_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -14,7 +15,6 @@ class MainMenu extends StatefulWidget {
 class _MainMenuState extends State<MainMenu> {
   @override
   Widget build(BuildContext context) {
-    final user = FirebaseAuth.instance.currentUser!.email!.toString();
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
@@ -36,7 +36,8 @@ class _MainMenuState extends State<MainMenu> {
                       children: [
                         RichText(
                           text: TextSpan(
-                            text: 'Hi, $user',
+                            text:
+                                'Hi, ${FirebaseAuth.instance.currentUser!.email!.toString()}',
                             style: const TextStyle(fontSize: 16),
                           ),
                         ),
@@ -44,9 +45,7 @@ class _MainMenuState extends State<MainMenu> {
                         IconButton(
                           icon: const Icon(Icons.settings, color: Colors.white),
                           onPressed: () {
-                            Get.to(
-                              () => const SettingsPage(),
-                            );
+                            Get.to(() => const SettingsPage());
                           },
                         )
                       ],
@@ -118,7 +117,9 @@ class _MainMenuState extends State<MainMenu> {
                                   ),
                                 ),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                Get.to(() => const AddProfile());
+                              },
                               label: const Text(
                                 'Show QR Code',
                                 style: TextStyle(
