@@ -87,8 +87,17 @@ class _AddProfileState extends State<AddProfile> {
           ],
         ),
       );
+
+  Stream<List<User>> readUsers() => FirebaseFirestore.instance
+      .collection('accounts')
+      .snapshots()
+      .map((snapshot) =>
+          snapshot.docs.map((doc) => User.fromJson(doc.data())).toList());
+
   Future createUser(User user) async {
-    final docUser = FirebaseFirestore.instance.collection('accounts').doc(FirebaseAuth.instance.currentUser!.email!.toString());
+    final docUser = FirebaseFirestore.instance
+        .collection('accounts')
+        .doc(FirebaseAuth.instance.currentUser!.email!.toString());
     user.id = docUser.id;
 
     final json = user.toJson();
@@ -115,7 +124,6 @@ class User {
       required this.twitter});
 
   Map<String, dynamic> toJson() => {
-
         'email': email,
         'instagram': 'https://www.instagram.com/$instagram',
         'facebook': 'https://www.facebook.com/$facebook',
@@ -123,4 +131,12 @@ class User {
         'twitter': 'https://www.twitter.com/$twitter',
         'line': line,
       };
+
+  static User fromJson(Map<String, dynamic> json) => User(
+      email: json['email'],
+      instagram: json['instagram'],
+      facebook: json['facebook'],
+      linkedin: json['linkedin'],
+      twitter: json['twitter'],
+      line: json['line']);
 }

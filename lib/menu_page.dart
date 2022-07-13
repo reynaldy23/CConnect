@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class MainMenu extends StatefulWidget {
   const MainMenu({Key? key}) : super(key: key);
@@ -13,6 +14,26 @@ class MainMenu extends StatefulWidget {
 }
 
 class _MainMenuState extends State<MainMenu> {
+  final controllerEmail = TextEditingController();
+  final controllerInstagram = TextEditingController();
+  final controllerFacebook = TextEditingController();
+  final controllerLinkedIn = TextEditingController();
+  final controllerLine = TextEditingController();
+  final controllerTwitter = TextEditingController();
+
+  Widget buildUser(Users user) => ListTile(
+    leading: CircleAvatar(
+      child: Text(user.email)),
+    title: Text(user.instagram),
+      subtitle: Text(user.linkedin),
+    );
+
+  Stream<List<Users>> readUsers() => FirebaseFirestore.instance
+      .collection('accounts')
+      .snapshots()
+      .map((snapshot) =>
+      snapshot.docs.map((doc) => Users.fromJson(doc.data())).toList());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -138,37 +159,103 @@ class _MainMenuState extends State<MainMenu> {
             ),
           ),
           const SizedBox(height: 73),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: RichText(
-              text: TextSpan(
+          Row(
+            children: [
+              const SizedBox(width: 28),
+              Column(
                 children: [
-                  const TextSpan(
-                    text: '    ',
-                    style: TextStyle(fontSize: 28),
-                  ),
-                  const WidgetSpan(
-                    child: Icon(
-                      Icons.person_add,
-                      size: 30,
-                      color: Color(0xFF1190EE),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: RichText(
+                      text: TextSpan(
+                        children: [
+                          // const TextSpan(
+                          //   text: '    ',
+                          //   style: TextStyle(fontSize: 28),
+                          // ),
+                          const WidgetSpan(
+                            child: Icon(
+                              Icons.person_add,
+                              size: 30,
+                              color: Color(0xFF1190EE),
+                            ),
+                          ),
+                          TextSpan(
+                            text: ' Contacts',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 28,
+                              fontFamily: GoogleFonts.poppins().fontFamily,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                  TextSpan(
-                    text: ' Contacts',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 28,
-                      fontFamily: GoogleFonts.poppins().fontFamily,
-                    ),
-                  ),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: StreamBuilder<List<Users>>(stream: readUsers(),
+                        builder: (context, snapshot) {
+                      if (snapshot.hasError){
+                        return Text('Something went Wrong! $snapshot'); //check later
+                      }
+                      else if (snapshot.hasData){
+                        final users = snapshot.data!;
+
+                        return ListView(
+                          children: users.map(buildUser).toList(),
+                        );
+                      } else {
+                        return const Center(child: CircularProgressIndicator());
+                      }
+                        }),
+                  )
                 ],
               ),
-            ),
+            ],
           ),
         ],
       ),
     );
+
+
   }
+}
+
+
+class Users {
+  String id;
+  final String email;
+  final String instagram;
+  final String facebook;
+  final String linkedin;
+  final String line;
+  final String twitter;
+
+  Users(
+      {this.id = '',
+        required this.email,
+        required this.instagram,
+        required this.facebook,
+        required this.linkedin,
+        required this.line,
+        required this.twitter});
+
+  Map<String, dynamic> toJson() => {
+    'email': email,
+    'instagram': 'https://www.instagram.com/$instagram',
+    'facebook': 'https://www.facebook.com/$facebook',
+    'linkedin': 'https://www.linkedin.com/in/$linkedin',
+    'twitter': 'https://www.twitter.com/$twitter',
+    'line': line,
+  };
+
+  static Users fromJson(Map<String, dynamic> json) => Users(
+      email: json['email'],
+      instagram: json['instagram'],
+      facebook: json['facebook'],
+      linkedin: json['linkedin'],
+      twitter: json['twitter'],
+      line: json['line']);
 }
