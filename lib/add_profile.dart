@@ -25,14 +25,14 @@ class _AddProfileState extends State<AddProfile> {
         body: ListView(
           padding: const EdgeInsets.all(16),
           children: <Widget>[
-            TextField(
-              // enabled: false,
-              controller: controllerEmail,
-              decoration: const InputDecoration(
-                  border: OutlineInputBorder(), hintText: 'E-mail'),
-              keyboardType: TextInputType.emailAddress,
-            ),
-            const SizedBox(height: 24),
+            // TextField(
+            //   // enabled: false,
+            //   controller: controllerEmail,
+            //   decoration: const InputDecoration(
+            //       border: OutlineInputBorder(), hintText: 'E-mail'),
+            //   keyboardType: TextInputType.emailAddress,
+            // ),
+            // const SizedBox(height: 24),
             TextField(
               controller: controllerInstagram,
               decoration: const InputDecoration(
@@ -96,7 +96,7 @@ class _AddProfileState extends State<AddProfile> {
 
   Future createUser(User user) async {
     final docUser = FirebaseFirestore.instance
-        .collection('accounts')
+        .collection('users')
         .doc(FirebaseAuth.instance.currentUser!.email!.toString());
     user.id = docUser.id;
 
@@ -124,7 +124,7 @@ class User {
       required this.twitter});
 
   Map<String, dynamic> toJson() => {
-        'email': email,
+        'email': FirebaseAuth.instance.currentUser!.email!,
         'instagram': 'https://www.instagram.com/$instagram',
         'facebook': 'https://www.facebook.com/$facebook',
         'linkedin': 'https://www.linkedin.com/in/$linkedin',
