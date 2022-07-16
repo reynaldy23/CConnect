@@ -88,16 +88,10 @@ class _AddProfileState extends State<AddProfile> {
         ),
       );
 
-  Stream<List<User>> readUsers() => FirebaseFirestore.instance
-      .collection('accounts')
-      .snapshots()
-      .map((snapshot) =>
-          snapshot.docs.map((doc) => User.fromJson(doc.data())).toList());
-
   Future createUser(User user) async {
     final docUser = FirebaseFirestore.instance
-        .collection('users')
-        .doc(FirebaseAuth.instance.currentUser!.email!.toString());
+        .collection(FirebaseAuth.instance.currentUser!.email!.toString())
+        .doc('accounts');
     user.id = docUser.id;
 
     final json = user.toJson();

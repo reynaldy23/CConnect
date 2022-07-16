@@ -20,7 +20,7 @@ class _MainMenuState extends State<MainMenu> {
   List<String> docIDs = [];
 
   Future getDocId() async {
-    await FirebaseFirestore.instance.collection('users').get().then(
+    await FirebaseFirestore.instance.collection(user.email!).get().then(
           (snapshot) => snapshot.docs.forEach((document) {
             docIDs.add(document.reference.id);
           }),
@@ -46,24 +46,27 @@ class _MainMenuState extends State<MainMenu> {
                   //crossAxisAlignment
                   children: [
                     const SizedBox(height: 48),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        RichText(
-                          text: TextSpan(
-                            text:
-                                'Hi, ${user.email!}',
-                            style: const TextStyle(fontSize: 16),
+                    GestureDetector(
+                      onTap: (){Get.to(() => const AddProfile());},
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          RichText(
+                            text: TextSpan(
+                              text:
+                                  'Hi, ${user.email!}',
+                              style: const TextStyle(fontSize: 16),
+                            ),
                           ),
-                        ),
-                        const SizedBox(width: 138),
-                        IconButton(
-                          icon: const Icon(Icons.settings, color: Colors.white),
-                          onPressed: () {
-                            Get.to(() => const SettingsPage());
-                          },
-                        )
-                      ],
+                          const SizedBox(width: 138),
+                          IconButton(
+                            icon: const Icon(Icons.settings, color: Colors.white),
+                            onPressed: () {
+                              Get.to(() => const SettingsPage());
+                            },
+                          )
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -133,7 +136,7 @@ class _MainMenuState extends State<MainMenu> {
                                 ),
                               ),
                               onPressed: () {
-                                Get.to(() => const AddProfile());
+
                               },
                               label: const Text(
                                 'Show QR Code',
