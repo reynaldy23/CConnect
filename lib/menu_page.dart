@@ -1,4 +1,5 @@
 import 'package:cconnect/add_profile.dart';
+import 'package:cconnect/friend_account.dart';
 import 'package:cconnect/qr_create_page.dart';
 import 'package:cconnect/qr_scan_page.dart';
 import 'package:cconnect/read_data.dart';
@@ -65,8 +66,7 @@ class _MainMenuState extends State<MainMenu> {
                             icon:
                                 const Icon(Icons.settings, color: Colors.white),
                             onPressed: () {
-                              setState(() {});
-                              Get.to(() => const SettingsPage());
+                              Get.to(() => const FriendAccount());
                             },
                           )
                         ],
