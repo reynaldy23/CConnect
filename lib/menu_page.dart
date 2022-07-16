@@ -1,5 +1,6 @@
 import 'package:cconnect/add_profile.dart';
 import 'package:cconnect/qr_create_page.dart';
+import 'package:cconnect/qr_scan_page.dart';
 import 'package:cconnect/read_data.dart';
 import 'package:cconnect/settings_page.dart';
 import 'package:flutter/material.dart';
@@ -112,7 +113,9 @@ class _MainMenuState extends State<MainMenu> {
                                   ),
                                 ),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                Get.to(() => const QRScanPage());
+                              },
                               label: const Text(
                                 'Scan QR Code',
                                 style: TextStyle(
