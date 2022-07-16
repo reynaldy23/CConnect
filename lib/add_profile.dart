@@ -82,7 +82,7 @@ class _AddProfileState extends State<AddProfile> {
                 );
                 createUser(user);
               },
-              child: const Text('Create'),
+              child: const Text('Update'),
             )
           ],
         ),

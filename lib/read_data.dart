@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class GetUserName extends StatelessWidget {
   final String documentId;
@@ -11,8 +12,6 @@ class GetUserName extends StatelessWidget {
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser!;
     CollectionReference users = FirebaseFirestore.instance.collection(user.email!);
-
-    // print(documentId + 'haha');
 
     return FutureBuilder<DocumentSnapshot>(
       future: users.doc(documentId).get(),

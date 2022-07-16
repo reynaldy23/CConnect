@@ -1,4 +1,5 @@
 import 'package:cconnect/add_profile.dart';
+import 'package:cconnect/qr_create_page.dart';
 import 'package:cconnect/read_data.dart';
 import 'package:cconnect/settings_page.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,6 @@ class _MainMenuState extends State<MainMenu> {
         );
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,21 +47,24 @@ class _MainMenuState extends State<MainMenu> {
                   children: [
                     const SizedBox(height: 48),
                     GestureDetector(
-                      onTap: (){Get.to(() => const AddProfile());},
+                      onTap: () {
+                        Get.to(() => const AddProfile());
+                      },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           RichText(
                             text: TextSpan(
-                              text:
-                                  'Hi, ${user.email!}',
+                              text: 'Hi, ${user.email!}',
                               style: const TextStyle(fontSize: 16),
                             ),
                           ),
                           const SizedBox(width: 138),
                           IconButton(
-                            icon: const Icon(Icons.settings, color: Colors.white),
+                            icon:
+                                const Icon(Icons.settings, color: Colors.white),
                             onPressed: () {
+                              setState((){});
                               Get.to(() => const SettingsPage());
                             },
                           )
@@ -75,7 +78,7 @@ class _MainMenuState extends State<MainMenu> {
                   child: Container(
                     height: 170,
                     width: 376,
-                    decoration: BoxDecoration (
+                    decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(21),
                       color: const Color(0xFF1190EE),
                     ),
@@ -109,7 +112,7 @@ class _MainMenuState extends State<MainMenu> {
                                   ),
                                 ),
                               ),
-                              onPressed: () => FirebaseAuth.instance.signOut(),
+                              onPressed: () {},
                               label: const Text(
                                 'Scan QR Code',
                                 style: TextStyle(
@@ -136,7 +139,7 @@ class _MainMenuState extends State<MainMenu> {
                                 ),
                               ),
                               onPressed: () {
-
+                                Get.to(() => const QRCreatePage());
                               },
                               label: const Text(
                                 'Show QR Code',
@@ -155,7 +158,9 @@ class _MainMenuState extends State<MainMenu> {
               ],
             ),
           ),
-          const SizedBox(height: 55,),
+          const SizedBox(
+            height: 55,
+          ),
           Row(
             children: [
               const SizedBox(width: 28),
@@ -184,22 +189,28 @@ class _MainMenuState extends State<MainMenu> {
             ],
           ),
           Expanded(
-            child: FutureBuilder(
-              future: getDocId(),
-              builder: (context, snapshot){
-                return ListView.builder(
-                  itemCount: docIDs.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      title: GetUserName(documentId: docIDs[index],),
-                    );
-                  },
-                );
-              },
-            )
-          ),
+              child: FutureBuilder(
+            future: getDocId(),
+            builder: (context, snapshot) {
+              return ListView.builder(
+                itemCount: docIDs.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    title: GetUserName(
+                      documentId: docIDs[index],
+                    ),
+                  );
+                },
+              );
+            },
+          )),
         ],
       ),
     );
   }
 }
+
+// onPressed: () async {
+// DocumentSnapshot variable = await FirebaseFirestore.instance.collection('users').doc('email').get();
+// print(variable['email']);
+// },
