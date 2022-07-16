@@ -39,15 +39,15 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-          body: StreamBuilder<User?>(
-        stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return const MainMenu();
-          } else {
-            return const AuthPage();
-          }
-        },
-      ),
-  );
+        body: StreamBuilder<User?>(
+          stream: FirebaseAuth.instance.authStateChanges(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return const MainMenu();
+            } else {
+              return const AuthPage();
+            }
+          },
+        ),
+      );
 }

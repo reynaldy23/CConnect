@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
@@ -44,6 +46,7 @@ class _QRScanPageState extends State<QRScanPage> {
   @override
   Widget build(BuildContext context) {
     // scanQR();
+    final user = FirebaseAuth.instance.currentUser!;
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -66,7 +69,13 @@ class _QRScanPageState extends State<QRScanPage> {
                     style: const TextStyle(fontSize: 20),
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      await FirebaseFirestore.instance
+                          .collection(user.email!)
+                          .add(
+                        {'friend': _scanBarcode},
+                      );
+                    },
                     child: const Text('Add'),
                   ),
                 ],

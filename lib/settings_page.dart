@@ -37,7 +37,6 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               onPressed: () {
                 Get.to(() => const MainMenu());
-
               },
               label: const Text(
                 'Settings',

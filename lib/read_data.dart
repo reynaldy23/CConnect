@@ -11,11 +11,11 @@ class GetUserName extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser!;
-    CollectionReference users = FirebaseFirestore.instance.collection(user.email!);
+    CollectionReference users =
+        FirebaseFirestore.instance.collection(user.email!);
 
     return FutureBuilder<DocumentSnapshot>(
       future: users.doc(documentId).get(),
-
       builder: ((context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           Map<String, dynamic> data =

@@ -65,7 +65,7 @@ class _MainMenuState extends State<MainMenu> {
                             icon:
                                 const Icon(Icons.settings, color: Colors.white),
                             onPressed: () {
-                              setState((){});
+                              setState(() {});
                               Get.to(() => const SettingsPage());
                             },
                           )
