@@ -32,19 +32,14 @@ class _FriendAccountState extends State<FriendAccount> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Accounts'),
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              'signed in as: ${user.email!}',
-              style: const TextStyle(fontSize: 20),
-            ),
-            MaterialButton(
-              onPressed: () {},
-              color: Colors.deepPurple[200],
-              child: const Text('sign out'),
-            ),
+            const SizedBox(height: 20),
             Expanded(
                 child: FutureBuilder(
               future: getDocumentId(),

@@ -1,6 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:get/get.dart';
+
+import 'menu_page.dart';
 
 class AddProfile extends StatefulWidget {
   const AddProfile({Key? key}) : super(key: key);
@@ -81,6 +84,7 @@ class _AddProfileState extends State<AddProfile> {
                   twitter: controllerTwitter.text,
                 );
                 createUser(user);
+                Get.to(() => const MainMenu());
               },
               child: const Text('Update'),
             )

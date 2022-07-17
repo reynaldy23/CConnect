@@ -5,6 +5,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:get/get.dart';
+
+import 'menu_page.dart';
 
 class QRScanPage extends StatefulWidget {
   const QRScanPage({Key? key}) : super(key: key);
@@ -50,7 +53,12 @@ class _QRScanPageState extends State<QRScanPage> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Barcode scan'),
+          title: const Text('Barcode scan'),leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Get.to(() => const MainMenu());
+          },
+        ),
         ),
         body: Builder(
           builder: (BuildContext context) {
@@ -75,6 +83,7 @@ class _QRScanPageState extends State<QRScanPage> {
                           .add(
                         {'friend': _scanBarcode},
                       );
+                      Get.to(() => const MainMenu());
                     },
                     child: const Text('Add'),
                   ),
