@@ -10,6 +10,9 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+String FriendAccounts = '';
+String TheAccount ='';
+
 class MainMenu extends StatefulWidget {
   const MainMenu({Key? key}) : super(key: key);
 
@@ -66,7 +69,7 @@ class _MainMenuState extends State<MainMenu> {
                             icon:
                                 const Icon(Icons.settings, color: Colors.white),
                             onPressed: () {
-                              Get.to(() => const FriendAccount());
+                              Get.to(() => const SettingsPage());
                             },
                           )
                         ],
@@ -198,10 +201,28 @@ class _MainMenuState extends State<MainMenu> {
               return ListView.builder(
                 itemCount: docIDs.length,
                 itemBuilder: (context, index) {
+                  // String a = docIDs[index];
+
+                  // print(a);
+                  // print(b);
                   return ListTile(
                     title: GetUserName(
                       documentId: docIDs[index],
                     ),
+                    onTap: () async {
+                      FriendAccounts = docIDs[index];
+                      // print('fasd $FriendAccounts text');
+                      // print(docIDs[index]);
+                      DocumentSnapshot variable = await FirebaseFirestore.instance.collection(user.email!).doc(FriendAccounts).get();
+                      // print(variable['friend']);
+                      TheAccount = variable['friend'];
+                      print(TheAccount);
+                      Get.to(() => const FriendAccount());
+                    },
+                    // onPressed: () async {
+                    //   DocumentSnapshot variable = await FirebaseFirestore.instance.collection(user.email!).doc('accounts').get();
+                    //   print(variable['email']);
+                    // },
                   );
                 },
               );

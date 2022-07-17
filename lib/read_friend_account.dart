@@ -1,3 +1,4 @@
+import 'package:cconnect/menu_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
@@ -12,10 +13,10 @@ class GetFriendAccount extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser!;
-    print(documentId);
+    // print(documentId);
     CollectionReference users =
-        FirebaseFirestore.instance.collection(user.email!);
-    print(users);
+        FirebaseFirestore.instance.collection(TheAccount);
+    // print(users);
 
     return FutureBuilder<DocumentSnapshot>(
       future: users.doc('accounts').get(),
@@ -32,7 +33,8 @@ class GetFriendAccount extends StatelessWidget {
                   text: '${data['email']}\n',
                   recognizer: TapGestureRecognizer()
                     ..onTap = () async {
-                      launchUrl(Uri.parse(data['email']));
+                      launchUrl(Uri.parse(data['email']),
+                          mode: LaunchMode.externalApplication);
                     },
                 ),
                 const TextSpan(text: 'instagram:\n'),
@@ -40,7 +42,8 @@ class GetFriendAccount extends StatelessWidget {
                   text: '${data['instagram']}\n',
                   recognizer: TapGestureRecognizer()
                     ..onTap = () {
-                      launchUrl(Uri.parse(data['instagram']));
+                      launchUrl(Uri.parse(data['instagram']),
+                          mode: LaunchMode.externalApplication);
                     },
                 ),
                 const TextSpan(text: 'facebook:\n'),
@@ -48,7 +51,8 @@ class GetFriendAccount extends StatelessWidget {
                   text: '${data['facebook']}\n',
                   recognizer: TapGestureRecognizer()
                     ..onTap = () {
-                      launchUrl(Uri.parse(data['facebook']));
+                      launchUrl(Uri.parse(data['facebook']),
+                          mode: LaunchMode.externalApplication);
                     },
                 ),
                 const TextSpan(text: 'twitter:\n'),
@@ -56,7 +60,8 @@ class GetFriendAccount extends StatelessWidget {
                   text: '${data['twitter']}\n',
                   recognizer: TapGestureRecognizer()
                     ..onTap = () {
-                      launchUrl(Uri.parse(data['twitter']));
+                      launchUrl(Uri.parse(data['twitter']),
+                          mode: LaunchMode.externalApplication);
                     },
                 ),
                 const TextSpan(text: 'line:\n'),
@@ -64,7 +69,8 @@ class GetFriendAccount extends StatelessWidget {
                   text: '${data['line']}\n',
                   recognizer: TapGestureRecognizer()
                     ..onTap = () {
-                      launchUrl(Uri.parse(data['line']));
+                      launchUrl(Uri.parse(data['line']),
+                          mode: LaunchMode.externalApplication);
                     },
                 ),
                 const TextSpan(text: 'linkedin:\n'),
@@ -72,7 +78,8 @@ class GetFriendAccount extends StatelessWidget {
                   text: '${data['linkedin']}\n',
                   recognizer: TapGestureRecognizer()
                     ..onTap = () {
-                      launchUrl(Uri.parse(data['linkedin']));
+                      launchUrl(Uri.parse(data['linkedin']),
+                          mode: LaunchMode.externalApplication);
                     },
                 ),
               ],

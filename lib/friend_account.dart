@@ -3,6 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import 'menu_page.dart';
+
 class FriendAccount extends StatefulWidget {
   const FriendAccount({Key? key}) : super(key: key);
 
@@ -12,17 +14,19 @@ class FriendAccount extends StatefulWidget {
 
 class _FriendAccountState extends State<FriendAccount> {
   final user = FirebaseAuth.instance.currentUser!;
+  final friendAcc = FriendAccounts;
+// DocumentSnapshot variable = await FirebaseFirestore.instance.collection('users').doc('friend').get();
 
   List<String> docIDs = [];
 
   Future getDocumentId() async {
     await FirebaseFirestore.instance.collection(user.email!).get().then(
           (snapshot) => snapshot.docs.forEach((document) {
+            // print(friendAcc);
             docIDs.add(document.reference.id);
             // print(docIDs);
           }),
         );
-
   }
 
   @override
@@ -43,19 +47,20 @@ class _FriendAccountState extends State<FriendAccount> {
             ),
             Expanded(
                 child: FutureBuilder(
-                  future: getDocumentId(),
-                  builder: (context, snapshot){
-                    return ListView.builder(
-                      itemCount: 1,
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                          title: GetFriendAccount(documentId: 'accounts',),
-                        );
-                      },
+              future: getDocumentId(),
+              builder: (context, snapshot) {
+                return ListView.builder(
+                  itemCount: 1,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      title: GetFriendAccount(
+                        documentId: 'accounts',
+                      ),
                     );
                   },
-                )
-            ),
+                );
+              },
+            )),
           ],
         ),
       ),
