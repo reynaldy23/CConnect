@@ -53,12 +53,13 @@ class _QRScanPageState extends State<QRScanPage> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Barcode scan'),leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Get.to(() => const MainMenu());
-          },
-        ),
+          title: const Text('Barcode scan'),
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              Get.to(() => const MainMenu());
+            },
+          ),
         ),
         body: Builder(
           builder: (BuildContext context) {

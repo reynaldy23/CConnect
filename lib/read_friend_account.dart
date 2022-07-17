@@ -12,8 +12,6 @@ class GetFriendAccount extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = FirebaseAuth.instance.currentUser!;
-    // print(documentId);
     CollectionReference users =
         FirebaseFirestore.instance.collection(TheAccount);
     // print(users);
