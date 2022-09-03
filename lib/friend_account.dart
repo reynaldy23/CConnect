@@ -15,7 +15,6 @@ class FriendAccount extends StatefulWidget {
 class _FriendAccountState extends State<FriendAccount> {
   final user = FirebaseAuth.instance.currentUser!;
   final friendAcc = FriendAccounts;
-// DocumentSnapshot variable = await FirebaseFirestore.instance.collection('users').doc('friend').get();
 
   List<String> docIDs = [];
 

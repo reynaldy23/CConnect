@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
+// change to stateless?
 class QRCreatePage extends StatefulWidget {
   const QRCreatePage({Key? key}) : super(key: key);
 

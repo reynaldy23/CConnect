@@ -82,7 +82,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         'Language',
                         style: TextStyle(fontSize: 18, color: Colors.black),
                       ),
-                      onPressed: () => FirebaseAuth.instance.signOut(),
+                      onPressed: () {},
                     ),
                   ),
                   const SizedBox(height: 20),

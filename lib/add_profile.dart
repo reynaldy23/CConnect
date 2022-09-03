@@ -28,14 +28,6 @@ class _AddProfileState extends State<AddProfile> {
         body: ListView(
           padding: const EdgeInsets.all(16),
           children: <Widget>[
-            // TextField(
-            //   // enabled: false,
-            //   controller: controllerEmail,
-            //   decoration: const InputDecoration(
-            //       border: OutlineInputBorder(), hintText: 'E-mail'),
-            //   keyboardType: TextInputType.emailAddress,
-            // ),
-            // const SizedBox(height: 24),
             TextField(
               controller: controllerInstagram,
               decoration: const InputDecoration(
@@ -87,7 +79,7 @@ class _AddProfileState extends State<AddProfile> {
                 Get.to(() => const MainMenu());
               },
               child: const Text('Update'),
-            )
+            ),
           ],
         ),
       );

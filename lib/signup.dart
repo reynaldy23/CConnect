@@ -44,9 +44,10 @@ class _SignUpState extends State<SignUp> {
       }
     }
 
-    return Scaffold(
-      backgroundColor: const Color(0xFF3F5A9E),
-      body: SizedBox.expand(
+    return SingleChildScrollView(
+      child: Container(
+        color: const Color(0xFF3F5A9E),
+        height: MediaQuery.of(context).size.height,
         child: Form(
           key: formKey,
           child: Column(
